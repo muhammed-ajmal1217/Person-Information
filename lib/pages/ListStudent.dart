@@ -92,7 +92,7 @@ class ListStudent extends StatelessWidget {
 
   Future<void> gobackTodetails(BuildContext context) async {
     await Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (ctx) => ListEnter()));
+        .push(MaterialPageRoute(builder: (ctx) => ListEnter()));
   }
 
   void navigateToDetails(BuildContext context, StudentModel student) {
@@ -101,6 +101,7 @@ class ListStudent extends StatelessWidget {
       MaterialPageRoute(builder: (context) => Details(student: student,)),
     );
   }
+  
 
 
 

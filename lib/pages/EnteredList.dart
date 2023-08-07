@@ -145,7 +145,7 @@ class _ListEnterState extends State<ListEnter> {
                       controller: _classController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'E-mail',
+                        hintText: 'Class',
                       ),
                     ),
                     const SizedBox(
@@ -162,7 +162,7 @@ class _ListEnterState extends State<ListEnter> {
                       controller: _dobController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Phone',
+                        hintText: 'Division',
                       ),
                     ),
                     const SizedBox(
@@ -237,7 +237,7 @@ class _ListEnterState extends State<ListEnter> {
     );
 
     addStudent(student);
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
       return ListStudent();
     }));
   }

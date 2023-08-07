@@ -90,9 +90,10 @@ class _edit_studentState extends State<edit_student> {
                               ),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 5,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           MaterialButton(
                             onPressed: () {
@@ -104,20 +105,21 @@ class _edit_studentState extends State<edit_student> {
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
-                          SizedBox(
-                            width: 35,
-                          ),
+                          
                           MaterialButton(
                             onPressed: () {
                               getCam();
                             },
                             color: Colors.blue[900],
-                            child: Text(
+                            child: const Text(
                               'Take from Camera',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ],
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       TextField(
                         controller: _nameController,
@@ -127,7 +129,7 @@ class _edit_studentState extends State<edit_student> {
                           labelText: 'Name'
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
@@ -139,28 +141,28 @@ class _edit_studentState extends State<edit_student> {
                           filled: true,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
                         controller: _classController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'E-mail'
+                          labelText: 'Class'
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
                         controller: _dobController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Phone',
+                          labelText: 'Division',
                           filled: true,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
@@ -171,25 +173,25 @@ class _edit_studentState extends State<edit_student> {
                           filled: true,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
                           updateall();
                         },
-                        label: Text('Save'),
-                        icon: Icon(Icons.check),
+                        label: const Text('Save'),
+                        icon: const Icon(Icons.check),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
                           editGoback();
                         },
-                        icon: Icon(Icons.arrow_back),
-                        label: Text('Go back to List'),
+                        icon: const Icon(Icons.arrow_back),
+                        label: const Text('Go back to List'),
                       ),
                     ]),
                   ),
@@ -227,7 +229,7 @@ class _edit_studentState extends State<edit_student> {
           imagePath: ed5);
 
       gotoEditPage(widget.index, updation);
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => ListStudent()));
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -236,17 +238,7 @@ class _edit_studentState extends State<edit_student> {
           content: Text("Saved changes")));
     }
   }
-//   getimage() async {
-//     final ? _wantimage =
-//         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-//     if (_wantimage != null) {
-//       setState(() {
-//         _file = File(_wantimage.path);
-//         carphoto = _wantimage.path;
-//       });
-//     }
-//   }
 
   getCam() async {
     var img = await image.pickImage(source: ImageSource.camera);

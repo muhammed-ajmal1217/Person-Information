@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 34, 90, 136),
         title: Text(
-          'Persons Informations',
+          'Students Informations',
           style: TextStyle(color: Colors.white),
         ),
       ),
