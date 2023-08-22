@@ -30,9 +30,9 @@ class edit_student extends StatefulWidget {
   State<edit_student> createState() => _edit_studentState();
 }
 
-File? file;
+// File? file;
 
-ImagePicker image = ImagePicker();
+// ImagePicker image = ImagePicker();
 
 class _edit_studentState extends State<edit_student> {
   TextEditingController _nameController = TextEditingController();
@@ -40,7 +40,8 @@ class _edit_studentState extends State<edit_student> {
   TextEditingController _classController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
-
+  ImagePicker image = ImagePicker();
+  File? file;
 
 
 
@@ -97,7 +98,7 @@ class _edit_studentState extends State<edit_student> {
                         children: [
                           MaterialButton(
                             onPressed: () {
-                              getGallary();
+                              getCam(ImageSource.gallery);
                             },
                             color: Colors.blue[900],
                             child: Text(
@@ -108,7 +109,7 @@ class _edit_studentState extends State<edit_student> {
                           
                           MaterialButton(
                             onPressed: () {
-                              getCam();
+                              getCam(ImageSource.camera);
                             },
                             color: Colors.blue[900],
                             child: const Text(
@@ -240,15 +241,8 @@ class _edit_studentState extends State<edit_student> {
   }
 
 
-  getCam() async {
-    var img = await image.pickImage(source: ImageSource.camera);
-    setState(() {
-      file = File(img!.path);
-    });
-  }
-
-  getGallary() async {
-    var img = await image.pickImage(source: ImageSource.gallery);
+  getCam(ImageSource source) async {
+    var img = await image.pickImage(source:source);
     setState(() {
       file = File(img!.path);
     });
