@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:studentapp/pages/model/StudentModel.dart';
 
-import '../Details.dart';
 
 ValueNotifier<List<StudentModel>> studentListNotifier = ValueNotifier([]);
 
@@ -23,7 +22,7 @@ Future<void> getAllstudents() async {
 
 Future<void> deletStudent(index) async {
   final studentDb = await Hive.openBox<StudentModel>('student_db');
-  studentDb.deleteAt(index);
+  await studentDb.deleteAt(index);
   getAllstudents();
 }
 

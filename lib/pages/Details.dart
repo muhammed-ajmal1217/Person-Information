@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:studentapp/pages/ListStudent.dart';
@@ -22,27 +22,38 @@ class _DetailsState extends State<Details> {
   @override
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundColor: Colors.blue[300],
-                backgroundImage: FileImage(File(widget.student.imagePath)),
-                child: file == null
-                    ? Container()
-                    : ClipOval(
-                        child: Image.file(
-                          file!,
-                          fit: BoxFit.cover,
-                          width: 133,
-                          height: 133,
+              Container(
+                
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color.fromARGB(255, 250, 252, 252),
+                    width: 3,
+                  ),
+                ),
+                child: CircleAvatar(
+                  radius: screenWidth * 0.3,
+                  backgroundColor: Colors.blue[300],
+                  backgroundImage: FileImage(File(widget.student.imagePath)),
+                  child: file == null
+                      ? Container()
+                      : ClipOval(
+                          child: Image.file(
+                            file!,
+                            fit: BoxFit.cover,
+                            width: screenWidth * 0.4,
+                            height: screenWidth * 0.4,
+                          ),
                         ),
-                      ),
+                ),
               ),
-
               Text(
                 ' ${widget.student.name}',
                 style: const TextStyle(fontSize: 25),

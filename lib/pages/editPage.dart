@@ -30,10 +30,6 @@ class edit_student extends StatefulWidget {
   State<edit_student> createState() => _edit_studentState();
 }
 
-// File? file;
-
-// ImagePicker image = ImagePicker();
-
 class _edit_studentState extends State<edit_student> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
@@ -43,10 +39,6 @@ class _edit_studentState extends State<edit_student> {
   ImagePicker image = ImagePicker();
   File? file;
 
-
-
-
-
   @override
   void initState() {
     super.initState();
@@ -55,152 +47,175 @@ class _edit_studentState extends State<edit_student> {
     _classController = TextEditingController(text: widget.Class);
     _dobController = TextEditingController(text: widget.dob);
     _addressController = TextEditingController(text: widget.address);
-
-  }
+    file = widget.imagePath != '' ? File(widget.imagePath) : null;
+    }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SizedBox(height: 50),
-                  Container(
-                    margin: const EdgeInsets.only(left: 30, right: 30),
-                    child: Column(children: [
-                      CircleAvatar(
-                        radius: 70,
-                        backgroundColor: Color.fromARGB(255, 56, 57, 58),
-                        child: file == null
-                            ? Icon(
-                                Icons.camera_alt_outlined,
-                                size: 50,
-                              )
-                            : ClipOval(
-                                child: Image.file(
-                                  file!,
-                                  fit: BoxFit.cover,
-                                  width: 133,
-                                  height: 133,
+      body: Builder(
+        builder: (context) {
+          final mediaQuery = MediaQuery.of(context);
+          return Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: mediaQuery.size.width * 0,  
+                vertical: mediaQuery.size.height * 0,  
+              ),
+            child: ListView(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(height: 20),
+                      Container(
+                        margin: const EdgeInsets.only(left: 30, right: 30),
+                        child: Column(children: [
+                          Container(
+                          width: 140,
+                          height: 140,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 3,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 70,
+                            backgroundColor: Color.fromARGB(255, 95, 166, 236),
+                            child: file == null
+                                ? Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 50,
+                                  )
+                                : ClipOval(
+                                    child: Image.file(
+                                      file!,
+                                      fit: BoxFit.cover,
+                                      width: 133,
+                                      height: 133,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    getCam(ImageSource.gallery);
+                                  },
+                                  color: Colors.blue[900],
+                                  child: Text(
+                                    'Take from Gallary',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              getCam(ImageSource.gallery);
-                            },
-                            color: Colors.blue[900],
-                            child: Text(
-                              'Take from Gallary',
-                              style: TextStyle(color: Colors.white),
+                              SizedBox(width: 16,),
+                              Expanded(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    getCam(ImageSource.camera);
+                                  },
+                                  color: Colors.blue[900],
+                                  child: const Text(
+                                    'Take from Camera',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            controller: _nameController,
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(), labelText: 'Name',
+                                
+                                filled: true,
+                                ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: _ageController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Age',
+                              filled: true,
                             ),
                           ),
-                          
-                          MaterialButton(
-                            onPressed: () {
-                              getCam(ImageSource.camera);
-                            },
-                            color: Colors.blue[900],
-                            child: const Text(
-                              'Take from Camera',
-                              style: TextStyle(color: Colors.white),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: _classController,
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(), labelText: 'Class',
+                                filled: true,
+                                ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: _dobController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Division',
+                              filled: true,
                             ),
                           ),
-                        ],
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: _addressController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Address',
+                              filled: true,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              updateall();
+                            },
+                            label: const Text('Save'),
+                            icon: const Icon(Icons.check),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              editGoback();
+                            },
+                            icon: const Icon(Icons.arrow_back),
+                            label: const Text('Go back to List'),
+                          ),
+                        ]),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        controller: _nameController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          // hintText: 'Name',
-                          labelText: 'Name'
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: _ageController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          // hintText: 'Age',
-                          labelText: 'Age',
-                          filled: true,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: _classController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Class'
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: _dobController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Division',
-                          filled: true,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: _addressController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Address',
-                          filled: true,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          updateall();
-                        },
-                        label: const Text('Save'),
-                        icon: const Icon(Icons.check),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          editGoback();
-                        },
-                        icon: const Icon(Icons.arrow_back),
-                        label: const Text('Go back to List'),
-                      ),
-                    ]),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        }
       ),
     ));
   }
@@ -230,8 +245,8 @@ class _edit_studentState extends State<edit_student> {
           imagePath: ed5);
 
       gotoEditPage(widget.index, updation);
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ListStudent()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ListStudent()));
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           behavior: SnackBarBehavior.floating,
@@ -240,9 +255,8 @@ class _edit_studentState extends State<edit_student> {
     }
   }
 
-
   getCam(ImageSource source) async {
-    var img = await image.pickImage(source:source);
+    var img = await image.pickImage(source: source);
     setState(() {
       file = File(img!.path);
     });

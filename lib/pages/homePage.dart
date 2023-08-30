@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:studentapp/pages/ListStudent.dart';
 import 'package:studentapp/pages/functions/db_functions.dart';
@@ -12,6 +13,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    // final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     getAllstudents();
     return Scaffold(
       appBar: AppBar(
@@ -23,13 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.only(top: 280),
+        padding: EdgeInsets.only(top: screenHeight * 0.25),
         child: Center(
           child: Column(
             children: [
               Image.asset(
                 'lib/images/student.png',
-                height: 150,
+                height: screenHeight * 0.3,
               )
             ],
           ),

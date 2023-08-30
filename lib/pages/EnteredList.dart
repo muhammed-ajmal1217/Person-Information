@@ -34,179 +34,206 @@ class _ListEnterState extends State<ListEnter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CircleAvatar(
-                      radius: 70,
-                      backgroundColor: Color.fromARGB(255, 56, 57, 58),
-                      child: file == null
-                          ? Icon(
-                              Icons.camera_alt_outlined,
-                              size: 50,
-                            )
-                          : ClipOval(
-                              child: Image.file(
-                                file!,
-                                fit: BoxFit.cover,
-                                width: 133,
-                                height: 133,
+      body: SafeArea(child: SingleChildScrollView(
+        child: Builder(builder: (context) {
+          final mediaQuery = MediaQuery.of(context);
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal:
+                  mediaQuery.size.width * 0, 
+              vertical: mediaQuery.size.height * 0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: 140,
+                          height: 140,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 3,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 70,
+                            backgroundColor: Color.fromARGB(255, 95, 166, 236),
+                            child: file == null
+                                ? Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 50,
+                                  )
+                                : ClipOval(
+                                    child: Image.file(
+                                      file!,
+                                      fit: BoxFit.cover,
+                                      width: 133,
+                                      height: 133,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: MaterialButton(
+                                onPressed: () {
+                                  getCam(ImageSource.gallery);
+                                },
+                                color: Colors.blue[900],
+                                child: Text(
+                                  'Take from Gallary',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Row(
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              getGallary();
-                            },
-                            color: Colors.blue[900],
-                            child: Text(
-                              'Take from Gallary',
-                              style: TextStyle(color: Colors.white),
+                            SizedBox(
+                              width: 16,
                             ),
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              getCam();
-                            },
-                            color: Colors.blue[900],
-                            child: Text(
-                              'Take from Camera',
-                              style: TextStyle(color: Colors.white),
+                            Expanded(
+                              child: MaterialButton(
+                                onPressed: () {
+                                  getCam(ImageSource.camera);
+                                },
+                                color: Colors.blue[900],
+                                child: Text(
+                                  'Take from Camera',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Name is Empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Name',
+                            filled: true,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Age is Empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _ageController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Age',
+                            filled: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Class is Empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _classController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Class',
+                            filled: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Division is Empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _dobController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Division',
+                            filled: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Address is Empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: _addressController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Address',
+                            filled: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton.icon(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                addbuttonClickedOn(context);
+                              } else {
+                                print('Data is Empty');
+                              }
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text('Add Student')),
+                        ElevatedButton.icon(
+                            onPressed: () {
+                              gobacktoList();
+                            },
+                            icon: const Icon(Icons.arrow_back),
+                            label: const Text('Go back to List')),
+                      ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Name is Empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _nameController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Name',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Age is Empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _ageController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Age',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Class is Empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _classController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Class',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Division is Empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _dobController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Division',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Address is Empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _addressController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Address',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton.icon(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            addbuttonClickedOn(context);
-                          } else {
-                            print('Data is Empty');
-                          }
-                        },
-                        icon: const Icon(Icons.add),
-                        label: const Text('Add Student')),
-                    ElevatedButton.icon(
-                        onPressed: () {
-                          gobacktoList();
-                        },
-                        icon: const Icon(Icons.arrow_back),
-                        label: const Text('Go back to List')),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        }),
       )),
     );
   }
@@ -237,20 +264,13 @@ class _ListEnterState extends State<ListEnter> {
     );
 
     addStudent(student);
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
       return ListStudent();
     }));
   }
 
-  getCam() async {
-    var img = await image.pickImage(source: ImageSource.camera);
-    setState(() {
-      file = File(img!.path);
-    });
-  }
-
-  getGallary() async {
-    var img = await image.pickImage(source: ImageSource.gallery);
+  getCam(ImageSource source) async {
+    var img = await image.pickImage(source: source);
     setState(() {
       file = File(img!.path);
     });
