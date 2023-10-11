@@ -18,8 +18,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     getAllstudents();
     return Scaffold(
+      backgroundColor: Colors.red[200],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 34, 90, 136),
+        backgroundColor:Colors.red[300],
         title: Text(
           'Students Informations',
           style: TextStyle(color: Colors.white),
