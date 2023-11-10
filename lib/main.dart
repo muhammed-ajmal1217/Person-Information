@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-
+import 'package:provider/provider.dart';
+import 'package:studentapp/model/StudentModel.dart';
 import 'package:studentapp/pages/homePage.dart';
-import 'package:studentapp/pages/model/StudentModel.dart';
+import 'package:studentapp/provider/list_adding_provider.dart';
+import 'package:studentapp/provider/list_editing_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,13 +21,19 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.highContrastLight(background: Color.fromARGB(255, 222, 224, 224)),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => listAddingProvider(),),
+        ChangeNotifierProvider(create: (context) => listEditingProvider(),),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.highContrastLight(background: Color.fromARGB(255, 222, 224, 224)),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
     );
   }
 }

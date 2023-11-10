@@ -1,12 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:studentapp/pages/EnteredList.dart';
-import 'package:studentapp/pages/editPage.dart';
-
-import 'Details.dart';
-import 'functions/db_functions.dart';
-import 'model/StudentModel.dart';
+import 'package:studentapp/controler/list_student_controller.dart';
+import 'package:studentapp/model/StudentModel.dart';
+import 'package:studentapp/pages/list_edit_page.dart';
+import 'package:studentapp/functions/db_functions.dart';
 
 class ListStudent extends StatelessWidget {
   ListStudent({
@@ -16,6 +13,14 @@ class ListStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor:Color.fromARGB(255, 75, 9, 69),
+        title: Text(
+          'List of Students',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      backgroundColor: Color.fromARGB(255, 159, 98, 161),
       body: SafeArea(
         child: Builder(builder: (context) {
           final mediaQuery = MediaQuery.of(context);
@@ -33,7 +38,8 @@ class ListStudent extends StatelessWidget {
                     final data = studentList[index];
                     return GestureDetector(
                       child: Card(
-                        elevation: 5,
+                        color: Color.fromARGB(255, 129, 32, 113),
+                        elevation: 15,
                         child: ListTile(
                           leading: Container(
                             child: GestureDetector(
@@ -46,7 +52,7 @@ class ListStudent extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: Color.fromARGB(255, 158, 222, 252),
+                                    color: Color.fromARGB(255, 182, 10, 159),
                                     width: 3,
                                   ),
                                 ),
@@ -69,7 +75,7 @@ class ListStudent extends StatelessWidget {
                                 },
                                 icon: const Icon(
                                   Icons.delete,
-                                  color: Colors.grey,
+                                  color: Colors.white,
                                 ),
                               ),
                               IconButton(
@@ -87,15 +93,15 @@ class ListStudent extends StatelessWidget {
                                 },
                                 icon: const Icon(
                                   Icons.edit,
-                                  color: Colors.grey,
+                                  color: Colors.white,
                                 ),
                               ),
                             ],
                           ),
-                          title: Text(data.name),
+                          title: Text(data.name,style: TextStyle(color: Colors.white),),
                           subtitle: Text(
                             'Click on the picture',
-                            style: TextStyle(color: Colors.grey, fontSize: 10),
+                            style: TextStyle(color: Colors.white, fontSize: 10),
                           ),
                         ),
                       ),
@@ -103,7 +109,7 @@ class ListStudent extends StatelessWidget {
                   },
                   separatorBuilder: (ctx, index) {
                     return const Divider(
-                      color: Color.fromARGB(255, 222, 224, 224),
+                      color: Color.fromARGB(255, 119, 3, 119)
                     );
                   },
                   itemCount: studentList.length,
@@ -113,31 +119,11 @@ class ListStudent extends StatelessWidget {
           );
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          gobackTodetails(context);
-        },
-        backgroundColor: const Color.fromARGB(255, 34, 90, 136),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+      floatingActionButton: FloatingButton(),
     );
   }
 
-  Future<void> gobackTodetails(BuildContext context) async {
-    await Navigator.of(context)
-        .pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) => ListEnter()), (route) => false);
-  }
 
-  void navigateToDetails(BuildContext context, StudentModel student) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => Details(
-                student: student,
-              )),
-    );
-  }
 }
+
+

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:studentapp/pages/model/StudentModel.dart';
-
-
+import 'package:studentapp/model/StudentModel.dart';
 ValueNotifier<List<StudentModel>> studentListNotifier = ValueNotifier([]);
 
 Future<void> addStudent(StudentModel value) async {
@@ -15,7 +13,6 @@ Future<void> addStudent(StudentModel value) async {
 Future<void> getAllstudents() async {
   final studentDb = await Hive.openBox<StudentModel>('student_db');
   studentListNotifier.value.clear();
-
   studentListNotifier.value.addAll(studentDb.values);
   studentListNotifier.notifyListeners();
 }
@@ -31,7 +28,6 @@ Future<void> gotoEditPage(index, StudentModel value) async {
   studentListNotifier.value.clear();
   studentListNotifier.value.addAll(studentDb.values);
   studentListNotifier.notifyListeners();
-
   studentDb.putAt(index, value);
   getAllstudents();
 }
